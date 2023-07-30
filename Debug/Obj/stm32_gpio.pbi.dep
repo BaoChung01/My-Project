@@ -1,0 +1,10 @@
+stm32_gpio.pbi: \
+  C:\Users\HP\Documents\Driver_STM32\Driver\ STM32F1\Driver\Src\stm32_gpio.c \
+  C:\Users\HP\Documents\Driver_STM32\Driver\ STM32F1\Driver\Inc\stm32_gpio.h \
+  C:\Users\HP\Documents\Driver_STM32\Driver\ STM32F1\Driver\Inc/stm32f1.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Defaults.h \
+  C:\\Program\ Files\ (x86)\\IAR\ Systems\\Embedded\ Workbench\ 8.3\\arm\\inc\\c\\DLib_Config_Normal.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product.h
