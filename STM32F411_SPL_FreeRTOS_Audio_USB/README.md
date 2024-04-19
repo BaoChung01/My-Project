@@ -1,6 +1,6 @@
 # Audio Project on STM32F411E discovery board
 
-Use STM32F411E discovery board to play music from USB
+Use the STM32F411E discovery board to play music from the USB
 
 ## Table of Contents
 
@@ -14,25 +14,25 @@ Use STM32F411E discovery board to play music from USB
 
 ## About the Project
 
-1. Module hardware use in the project				
+1. Module hardware used in the project				
 	- UART			-> print the log while running			
 	- BUTTON		-> play/stop the music, skip/pause the song			
-	- LED			-> show the status of playing song. status program			
-	- AUDIO			-> output the audio			
-	- USB OTG		-> read the song			
-	- Motion sensor	-> change the volume			
-2. Use the IDE KEIL C and the periperal standard library				
-3. The project use the RTOS to implement
+	- LED			-> shows the status of the playing the song. status program			
+	- AUDIO			-> Output the audio			
+	- USB OTG		-> Read the song			
+	- Motion sensor	-> Change the volume			
+2. Use the IDE KEIL C and the peripheral standard library				
+3. The project uses the RTOS to implement
 
 **[Back to top](#table-of-contents)**
 
 ## User story
 1. At the startup 2s:				
-	- Blink all the LED every 0.2s				
+	- Blink all the LEDs every 0.2s				
 	- Send the message to PC "Startup state"				
-	- Read the data from motion sensor				
+	- Read the data from the motion sensor				
 	- Read the data from USB				
-	- Send the initial sound to audio				
+	- Send the initial sound to the audio				
 2. Running state:				
 	- Press the Button one time for start/stop				
 	- Press the button twice to skip the song				
@@ -42,14 +42,14 @@ Use STM32F411E discovery board to play music from USB
 	- the Y axis is for incease/decrease the volume				
 	- The X axis (shaking) for next/previous song				
 	- The Z axis is for running the song faster/normal				
-4. The log file will be written into the USB as file log				
+4. The log file will be written into the USB as a file log				
 5. The LED is blink while running				
-	- 1s if doesnt play any song				
+	- 1s if doesn't play any song				
 	- 0.5s if playing the song				
 6. Audio				
-	- if the USB doesnt plug in, and button press, the audio "the USB doesnt plug" is speak				
+	- if the USB doesn't plugin, and the button pressed, the audio "the USB doesn't plug" is speak				
 	- Output the audio from USB				
-	- Speak the sound Beep when button press
+	- Speak the sound Beep when the button press
 
 **[Back to top](#table-of-contents)**
 
@@ -57,7 +57,7 @@ Use STM32F411E discovery board to play music from USB
 
 LyNC: 
 
-	- Setup GPIO Led, Button
+	- Setup GPIO LED, Button
 
 	- Setup SPI Motion Sensor
 
