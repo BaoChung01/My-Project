@@ -39,7 +39,7 @@ Use the STM32F411E discovery board to play music from the USB
 	- Press the button 3 times to pause the song				
 	- Hold the button for 3s to reject the USB				
 3. The motion sensor for increase/decrease the volume				
-	- the Y axis is for incease/decrease the volume				
+	- the Y axis is for inceasing/decreasing the volume				
 	- The X axis (shaking) for next/previous song				
 	- The Z axis is for running the song faster/normal				
 4. The log file will be written into the USB as a file log				
@@ -78,7 +78,7 @@ TaiNT:
 TuanLDM:
 
 	- Setup USART
-	- Responsible for coding following requirement based on module which was Setup by colleagues
+	- Responsible for coding following requirements based on the module which was Setup by colleagues
 
 **[Back to top](#table-of-contents)**
 
@@ -91,16 +91,16 @@ TuanLDM:
 5. Loudspeaker
 
 Clone the repo as follows:
-git clone https://github.com/BaoChung/My-Project.git
+git clone https://github.com/BaoChung01/My-Project.git
 
 Use Keil C v5 -> build-> flash to board
 
 ### Getting the Source
 
 
-This project is [hosted on GitHub](https://github.com/BaoChung/My-Project). You can clone this project directly using this command:
+This project is [hosted on GitHub](https://github.com/BaoChung01/My-Project.git). You can clone this project directly using this command:
 ```
-git clone https://github.com/BaoChung/My-Project.git
+git clone https://github.com/BaoChung01/My-Project.git
 ```
 
 ### Building
