@@ -16,7 +16,7 @@ Use the STM32F411E discovery board to play music from the USB
 
 1. Module hardware used in the project				
 	- UART			-> print the log while running			
-	- BUTTON		-> play/stop the music, skip/pause the song			
+	- BUTTON		-> play/stop, skip/pause the song			
 	- LED			-> shows the status of the playing the song. status program			
 	- AUDIO			-> Output the audio			
 	- USB OTG		-> Read the song			
