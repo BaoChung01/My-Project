@@ -1,0 +1,12 @@
+stm32f411xe\list.o: FreeRTOS\list.c
+stm32f411xe\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32f411xe\list.o: .\FreeRTOS\include\FreeRTOS.h
+stm32f411xe\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+stm32f411xe\list.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32f411xe\list.o: .\config\FreeRTOSConfig.h
+stm32f411xe\list.o: .\FreeRTOS\include\projdefs.h
+stm32f411xe\list.o: .\FreeRTOS\include\portable.h
+stm32f411xe\list.o: .\FreeRTOS\include\deprecated_definitions.h
+stm32f411xe\list.o: .\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h
+stm32f411xe\list.o: .\FreeRTOS\include\mpu_wrappers.h
+stm32f411xe\list.o: .\FreeRTOS\include\list.h

@@ -1,24 +1,17 @@
 /*
-** ###################################################################
-**     Processor:           STM32F411VET6U
-**     Compiler:            Keil ARM C/C++ Compiler
-**     Version:             rev. 1.0, 19/03/2024 - 19:58:27
-**
-**     Abstract:
-**         Build ModuleI3G4250D.h 
-**
-** ###################################################################
+* Filename: ModuleI3G4250D.h
+* Content: ModuleI3G4250D library of the program
 */
 #ifndef _MODULEI3G4250D_H_
 #define _MODULEI3G4250D_H_
 
 #include "stm32f4xx.h"
 
-#define I3G4250D_LOW_CS GPIO_ResetBits(GPIOE,GPIO_Pin_3)
-#define I3G4250D_HIGH_CS GPIO_SetBits(GPIOE,GPIO_Pin_3)
+#define I3G4250D_LOW_CS 				GPIO_ResetBits(GPIOE,GPIO_Pin_3)
+#define I3G4250D_HIGH_CS 				GPIO_SetBits(GPIOE,GPIO_Pin_3)
 
 /* Identification number */
-#define I3G4250D_WHO_AM_I									0xD3  /* The Value of WHO_AM_I register */
+#define I3G4250D_WHO_AM_I				0xD3  /* The Value of WHO_AM_I register */
 
 /* Registers addresses */
 #define I3G4250D_WHO_AM_I_ADDR          0x0F  /* device identification register */
@@ -39,26 +32,25 @@
 #define I3G4250D_FIFO_CTRL_REG_ADDR     0x2E  /* Fifo control Register */
 #define I3G4250D_FIFO_SRC_REG_ADDR      0x2F  /* Fifo src Register */
 
-
 /* I3G4250D main output structure */
 typedef struct {
-	int8_t X; /*!< X axis rotation */
-	int8_t Y; /*!< Y axis rotation */
-	int8_t Z; /*!< Z axis rotation */
+	int8_t X; 								  /*!< X axis rotation */
+	int8_t Y; 								  /*!< Y axis rotation */
+	int8_t Z; 								  /*!< Z axis rotation */
 } I3G4250D_Output_uint8_t;
 extern I3G4250D_Output_uint8_t I3G4250D_Data;
 
 /* I3G4250D Result enumerations */
 typedef enum {
-	I3G4250D_Result_Ok,   /*!< Everything OK */
-	I3G4250D_Result_Error /*!< Error occurred */
+	I3G4250D_Result_Ok,   					  /*!< Everything OK */
+	I3G4250D_Result_Error 					  /*!< Error occurred */
 } I3G4250D_Result_t;
 
 /* I3G4250D Scale enumerations */
 typedef enum {
-	I3G4250D_Scale_245, /*!< Set full scale to 245 mdps */ // Reset state
-	I3G4250D_Scale_500, /*!< Set full scale to 500 mdps */
-	I3G4250D_Scale_2000 /*!< Set full scale to 2000 mdps */
+	I3G4250D_Scale_245,					 	  /*!< Set full scale to 245 mdps */ // Reset state
+	I3G4250D_Scale_500, 					  /*!< Set full scale to 500 mdps */
+	I3G4250D_Scale_2000 					  /*!< Set full scale to 2000 mdps */
 } I3G4250D_Scale_t;
 
 /* Public function */

@@ -1,13 +1,6 @@
 /*
-** ###################################################################
-**     Processor:           STM32F411E DISCOVERY
-**     Compiler:            Keil ARM C/C++ Compiler
-**     Version:             rev. 1.0, 07/03/2024 - 19:58:27
-**
-**     Abstract:
-**         Build ModuleSPI.c for Stm32f411e Discovery
-**
-** ###################################################################
+* Filename: ModuleSPI.c
+* Content: handle ModuleSPI source code of the program
 */
 #include "stm32f4xx.h"                  // Device header
 #include "ModuleSPI.h"

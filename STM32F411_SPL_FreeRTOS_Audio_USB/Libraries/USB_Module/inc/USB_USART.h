@@ -3,8 +3,8 @@
 
 #include "stm32f4xx_conf.h"
 
-void USART1_init(uint32_t bound);
-void USART1_WriteData(uint16_t data);
-uint16_t USART1_ReceiveData(void);
+void USART6_init(uint32_t bound);
+void USART6_WriteData(uint16_t *pChar);
+uint16_t USART6_ReceiveData(void);
 
 #endif

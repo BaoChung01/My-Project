@@ -1,23 +1,15 @@
 /*
-** ###################################################################
-**     Processor:           STM32F411E DISCOVERY
-**     Compiler:            Keil ARM C/C++ Compiler
-**     Version:             rev. 1.0, 06/03/2024 - 19:58:27
-**
-**     Abstract:
-**         Build DelayLED.h for Stm32f411e Discovery
-**
-** ###################################################################
+* Filename: DelayLED.h
+* Content: DelayLED library of the program
 */
 #ifndef _DELAYLED_H_
 #define _DELAYLED_H_
 
 #include "stm32f4xx.h"                  // Device header
 
-/* 
-* Init Timer for Delay_ms function 
-* This function just work coreclly at 72Mhz (stm32f103c8t6).
-* This function using TIM2 and using interrupt 
+/** 
+* This function use the TIM2 with interrupt  
+* @brief  This function use to initialize the timer for Delay_ms function 
 */
 void Init_timerDelay(void);
 

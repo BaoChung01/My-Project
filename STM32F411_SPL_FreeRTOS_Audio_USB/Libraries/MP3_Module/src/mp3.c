@@ -17,12 +17,36 @@ char					file_read_buffer[FILE_READ_BUFFER_SIZE];
 volatile int			bytes_left;
 char					*read_ptr;
 
+/*get file name exit of folder*/
 const char *get_filename_ext(const char *filename) {
     const char *dot = strrchr(filename, '.');
     if(!dot || dot == filename) return "";
     return dot + 1;
 }
 
+/*
+ * This function is used to play songs from the path and remove the number of files (Seek).
+ * @brief Play song from path
+ * @param path: Path of folder
+ * @param seek: Number of files to ignore
+ * @retval FRESULT:
+ * FR_OK
+ * FR_DISK_ERR
+ * FR_INT_ERR
+ * FR_NOT_READY
+ * FR_NO_FILE
+ * FR_NO_PATH
+ * FR_INVALID_NAME
+ * FR_DENIED
+ * FR_EXIST
+ * FR_INVALID_OBJECT
+ * FR_WRITE_PROTECTED
+ * FR_INVALID_DRIVE
+ * FR_NOT_ENABLED
+ * FR_NO_FILESYSTEM
+ * FR_MKFS_ABORTED
+ * FR_TIMEOUT
+ */
 FRESULT play_directory (const char* path, unsigned char seek) {
 	FRESULT res;
 	FILINFO fno;
@@ -70,7 +94,13 @@ FRESULT play_directory (const char* path, unsigned char seek) {
 	return res;
 }
 
- void play_mp3(char* filename) {
+/*
+ * This function is used to play songs from file name
+ * @brief Play song from file name
+ * @param filename: filename of the songs
+ */
+void play_mp3(char *filename)
+{
 	unsigned int br, btr;
 	FRESULT res;
 

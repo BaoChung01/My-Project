@@ -1,29 +1,22 @@
 /*
-** ###################################################################
-**     Processor:           STM32F411E DISCOVERY
-**     Compiler:            Keil ARM C/C++ Compiler
-**     Version:             rev. 1.0, 06/04/2024 - 19:58:27
-**
-**     Abstract:
-**         Build ButtonControl.c for Stm32f411e Discovery
-**
-** ###################################################################
+* Filename: ButtonControl.c
+* Content: handle the source code of the button to control the audio
 */
 #include "ButtonControl.h"
 
-
-#define LED_ON 1
-#define LED_OFF 0
+#define LED_ON 					1
+#define LED_OFF 				0
 
 /* Using show Led state */
 volatile int ledState = LED_OFF;
+
 /** 
 * This function using EXTI4 of PORTA (PA4) 
 * @brief  Init EXTI4 to use the button control 
 */
 void Button_init(void)
 {
-		/* Enable RCC for Port A */
+	/* Enable RCC for Port A */
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 	
 	/* Enable RCC for EXTI */

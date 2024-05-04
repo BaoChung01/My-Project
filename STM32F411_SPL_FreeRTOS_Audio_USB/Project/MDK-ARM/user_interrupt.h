@@ -1,23 +1,19 @@
-#ifndef USER_INTERRUPT
-#define USER_INTERRUPT
+#ifndef _USER_INTERRUPT_
+#define _USER_INTERRUPT_
 
 #include "stm32f4xx.h"                  // Device header
+#include "common.h"
 
-#define INITIAL_COUNT 5
-
-extern volatile uint32_t i;
-extern volatile uint32_t j;
-extern volatile uint32_t msTick;
-extern volatile uint8_t pressButton;
-extern volatile uint16_t timeButton;
-extern volatile uint8_t stateButton;
-extern volatile uint16_t timeMotionSensor_u16;
-
-
-typedef enum{
-	Disable,
-	Enable
-}EnableDisable_t;
+typedef struct{
+	volatile uint32_t i;
+	volatile uint32_t j;
+	volatile uint32_t msTick_u32;
+	volatile uint16_t timeMotionSensor_u16;
+	volatile uint16_t timeButton_u16;
+	volatile uint8_t pressButton_u8;
+	volatile uint8_t stateButton_bit:1;
+}Interrupt_t;
+extern Interrupt_t USER_Interrupt;
 
 typedef struct{
 	/*  */
@@ -42,4 +38,4 @@ void EXTI0_IRQHandler(void);
 void TIM2_IRQHandler(void);
 
 
-#endif
+#endif /* _USER_INTERRUPT_ */

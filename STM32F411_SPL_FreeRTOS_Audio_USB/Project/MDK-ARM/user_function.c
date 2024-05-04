@@ -1,41 +1,47 @@
 #include "user_function.h"
 
+#define INTERVAL_PRESS_BUTTON 700
+#define INTERVAL_GET_COMMAND_SENSOR 2000
+#define POSITIVE 1
+#define NEGATIVE -1
+
 MotionSensor_t USER_MotionSensor;
 
 /* Absolutely value*/
 uint16_t USER_ABS16b(signed short p_Input_s16){
 	/* If input is +, return itself */
-	if (p_Input_s16 >= 0){
+	if (p_Input_s16 >= POSITIVE){
 		return p_Input_s16;
 	}
 	/* If input is -, return -input */
-	else {
-		return (p_Input_s16*(-1));
+	else if (p_Input_s16 <= NEGATIVE){
+		return (p_Input_s16*NEGATIVE);
 	}
+	return 0;
 }
 
 /* Delay_ms Function */
 void USER_DelayMs(int p_Time_ms){
-	msTick = 0; 
-	while (msTick < p_Time_ms){}
+	USER_Interrupt.msTick_u32 = 0; 
+	while (USER_Interrupt.msTick_u32 < p_Time_ms){}
 }
 
 /* Get state button */
 void USER_GetStateButton(void){
-	if (timeButton == 3000){
-		if (pressButton != 0){
-			USER_DelayMs(700);	//max interval of 2 times press button
-			if (pressButton == 1){
-				VariableMode.StartStop_bit ^= 1;	// On/Off bit
+	if (USER_Interrupt.timeButton_u16 == TIME_BUTTON_3000MS){
+		if (USER_Interrupt.pressButton_u8 != 0){
+			USER_DelayMs(INTERVAL_PRESS_BUTTON);	//max interval of 2 times press button
+			if (USER_Interrupt.pressButton_u8 == STATE_BUTTON(START_STOP)){
+				TOGGLE_BIT(VariableMode.StartStop_bit, BIT_0);	// On/Off bit
 			}
-			else if (pressButton == 2){
-				VariableMode.Skip_bit |= 1;				// On bit
+			else if (USER_Interrupt.pressButton_u8 == STATE_BUTTON(SKIP)){
+				ON_BIT(VariableMode.Skip_bit, BIT_0);				// On bit
 			}
-			else if (pressButton == 3){
-				VariableMode.Pause_bit ^= 1;			// On/Off bit
+			else if (USER_Interrupt.pressButton_u8 == STATE_BUTTON(PAUSE)){
+				TOGGLE_BIT(VariableMode.Pause_bit, BIT_0);			// On/Off bit
 			}
-			pressButton = 0;
-			stateButton = 0;	//Ensure not Error Signal
+			USER_Interrupt.pressButton_u8 = 0;
+			USER_Interrupt.stateButton_bit = 0;	//Ensure not Error Signal
 		}
 	}
 }
@@ -47,7 +53,7 @@ void USER_GetMotionSensor(void){
 	signed short f_DeltaY_s16 = 0;
 	signed short f_DeltaZ_s16 = 0;
 	
-	if (timeMotionSensor_u16 == 0){
+	if (USER_Interrupt.timeMotionSensor_u16 == 0){
 		/* Read data from Motion sensor */
 		I3G4250D_Read(&I3G4250D_Data);
 
@@ -66,34 +72,40 @@ void USER_GetMotionSensor(void){
 			/* if X-AXIS is largest change */
 			if ((USER_ABS16b(f_DeltaX_s16) >= USER_ABS16b(f_DeltaY_s16)) && 
 					(USER_ABS16b(f_DeltaX_s16) >= USER_ABS16b(f_DeltaZ_s16))){
-				if (f_DeltaX_s16 >= 0){
-					USER_MotionSensor.ChangeValueX_2bit |= 1u;		// = 01 (+)
+				if (f_DeltaX_s16 >= POSITIVE){
+					ON_BIT(USER_MotionSensor.ChangeValueX_2bit, BIT_0); // = 01 (+)
+					OFF_BIT(USER_MotionSensor.ChangeValueX_2bit, BIT_1);
 				}
 				else{
-					USER_MotionSensor.ChangeValueX_2bit |= 2u;		// = 10 (-)
+					OFF_BIT(USER_MotionSensor.ChangeValueX_2bit, BIT_0); // = 10 (-)
+					ON_BIT(USER_MotionSensor.ChangeValueX_2bit, BIT_1);
 				}
 			}
 			/* if Y-AXIS is largest change */
 			else if ((USER_ABS16b(f_DeltaY_s16) >= USER_ABS16b(f_DeltaX_s16)) && 
 							(USER_ABS16b(f_DeltaY_s16) >= USER_ABS16b(f_DeltaZ_s16))){
-				if (f_DeltaY_s16 >= 0){
-					USER_MotionSensor.ChangeValueY_2bit |= 1u;		// = 01 (+)
+				if (f_DeltaY_s16 >= POSITIVE){
+					ON_BIT(USER_MotionSensor.ChangeValueY_2bit, BIT_0); // = 01 (+)
+					OFF_BIT(USER_MotionSensor.ChangeValueY_2bit, BIT_1);
 				}
 				else{
-					USER_MotionSensor.ChangeValueY_2bit |= 2u;		// = 10 (-)
+					OFF_BIT(USER_MotionSensor.ChangeValueY_2bit, BIT_0); // = 10 (-)
+					ON_BIT(USER_MotionSensor.ChangeValueY_2bit, BIT_1);
 				}
 			}
 			/* if Z-AXIS is largest change */
 			else if ((USER_ABS16b(f_DeltaZ_s16) >= USER_ABS16b(f_DeltaX_s16)) && 
 							(USER_ABS16b(f_DeltaZ_s16) >= USER_ABS16b(f_DeltaY_s16))){
-				if (f_DeltaZ_s16 >= 0){
-					USER_MotionSensor.ChangeValueZ_2bit |= 1u;		// = 01 (+)
+				if (f_DeltaZ_s16 >= POSITIVE){
+					ON_BIT(USER_MotionSensor.ChangeValueZ_2bit, BIT_0); // = 01 (+)
+					OFF_BIT(USER_MotionSensor.ChangeValueZ_2bit, BIT_1);
 				}
 				else{
-					USER_MotionSensor.ChangeValueZ_2bit |= 2u;		// = 10 (-)
+					OFF_BIT(USER_MotionSensor.ChangeValueZ_2bit, BIT_0); // = 10 (-)
+					ON_BIT(USER_MotionSensor.ChangeValueZ_2bit, BIT_1);
 				}
 			}
-			timeMotionSensor_u16 = 2000;	// the interval of 2 times get command is 2s
+			USER_Interrupt.timeMotionSensor_u16 = INTERVAL_GET_COMMAND_SENSOR;	// the interval of 2 times get command is 2s
 		}
 	}
 }
@@ -101,13 +113,10 @@ void USER_GetMotionSensor(void){
 /* Sound of button */
 void USER_SoundButton(void){
 	/*  Speak “Peak” when button is pressed */
-	if (timeButton < 3000){	//press button
+	if (USER_Interrupt.timeButton_u16 < TIME_BUTTON_3000MS){	//press button
 		/* "Peak" */
-		for(i = 0; i < sizeof(beep_sound); i++){	//Length of "Beep" sound is 512 byte 
+		for(int i = 0; i < sizeof(beep_sound); i++){
 			OutputAudioSample(beep_sound[i]);
-			if ((timeButton == 3000) && (i > 200)){	//i>200 ensure to generate "Beep" sound
-				break;
-			}
 		}
 	}
 }
@@ -115,8 +124,8 @@ void USER_SoundButton(void){
 /* Error sound */
 void USER_SoundError(void){
 	/* (USB is not plug) && (button is pressed)  ->  the audio speak “the USB doesn’t plug” */
-	if ((VariableMode.RejectUSB_bit != 0) && (timeButton < 3000)){
-		for(i = 0; i < sizeof(error_sound); i++){
+	if ((VariableMode.RejectUSB_bit != 0) && (USER_Interrupt.timeButton_u16 < TIME_BUTTON_3000MS)){
+		for(int i = 0; i < sizeof(error_sound); i++){
 			OutputAudioSample(error_sound[i]);
 		}
 	}

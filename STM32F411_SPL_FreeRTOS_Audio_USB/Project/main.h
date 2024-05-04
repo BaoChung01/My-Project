@@ -28,7 +28,7 @@
 #include "mp3.h"
 #include "core_cm4.h"
 #include "stm32f4xx_conf.h"
-#include "USART_Hercules.h"
+#include "USB_USART.h"
 #include "user_function.h"
 #include "user_interrupt.h"
 #include "USB_Requirement.h"
@@ -37,10 +37,8 @@
 #include "usbh_core.h"
 #include "usbh_msc_core.h"
 #include <string.h>
+#include "common.h"
 
-#define ALL_LED (GPIO_Pin_15 | GPIO_Pin_14 | GPIO_Pin_13 | GPIO_Pin_12)
-#define TURN_ON_LED GPIO_SetBits(GPIOD, ALL_LED)
-#define TURN_OFF_LED GPIO_ResetBits(GPIOD, ALL_LED)
 
 #define DELAY_200MS 200
 #define DELAY_1000MS 1000

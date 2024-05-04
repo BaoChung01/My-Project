@@ -1,31 +1,17 @@
 /*
-** ###################################################################
-**     Processor:           STM32F411E DISCOVERY
-**     Compiler:            Keil ARM C/C++ Compiler
-**     Version:             rev. 1.0, 06/03/2024 - 19:58:27
-**
-**     Abstract:
-**         Build DelayLED.c for Stm32f411e Discovery
-**
-** ###################################################################
+* Filename: DelayLED.c
+* Content: handle DelayLED source code of the program
 */
-
 #include "DelayLED.h"
 
+#define SYS_CLOCK                   100000000
+#define SYS_CLOCK_DIV_1MHZ          1000000
+#define TIM_PERIOD_MS               (1000 - 1)
+#define PULSE_REDUNDANT             1
 
-
-#define SYS_CLOCK						100000000
-#define DELAY_1SECOND 				1000
-#define TRUE 		 		  				1
-#define VALUE_INIT_0  				0
-#define TIM_PRESCALER_84MHZ (8400 - 1)
-#define TIM_PERIOD_MS 			(1000 - 1)
-
-
-/* 
-* Init Timer for Delay_ms function 
-* This function just work coreclly at 100Mhz (STM32F411E) 
-* This function using TIM2 and using interrupt 
+/** 
+* This function use the TIM2 with interrupt  
+* @brief  This function use to initialize the timer for Delay_ms function 
 */
 void Init_timerDelay(void)
 {
@@ -35,8 +21,8 @@ void Init_timerDelay(void)
 	/* Init TIM2 */
 	TIM_TimeBaseInitTypeDef initTimer;
 	initTimer.TIM_CounterMode = TIM_CounterMode_Up;
-	initTimer.TIM_Prescaler = ((SYS_CLOCK / 1000000) - 1);
-	initTimer.TIM_Period = 1000 - 1;
+	initTimer.TIM_Prescaler = ((SYS_CLOCK / SYS_CLOCK_DIV_1MHZ) - PULSE_REDUNDANT);
+	initTimer.TIM_Period = TIM_PERIOD_MS;
 	TIM_TimeBaseInit(TIM2, &initTimer); 
 	
 	/* Init NVIC for TIM2 */

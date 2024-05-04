@@ -1,27 +1,23 @@
 /*
-** ###################################################################
-**     Processor:           STM32F411VET6U
-**     Compiler:            Keil ARM C/C++ Compiler
-**     Version:             rev. 1.0, 19/03/2024 - 19:58:27
-**
-**     Abstract:
-**         Build ModuleI3G4250D.c 
-**
-** ###################################################################
+* Filename: ModuleI3G4250D.c
+* Content: handle ModuleI3G4250D source code of the program
 */
 #include "ModuleI3G4250D.h"
+
+#define READ_MODE 				0x80
 
 /* Output Sensor */
 I3G4250D_Output_uint8_t I3G4250D_Data;
 
 static GPIO_InitTypeDef GPIOInit;
-static SPI_InitTypeDef SPIinit;
+static SPI_InitTypeDef  SPIinit;
 /**************************************************************************************************/
 /* Private function */
 void GPIOConfig(void);
 void SPIConfig(void);
 void SPI_Tx(uint8_t adress, uint8_t data);
 uint8_t SPI_Rx(uint8_t adress);
+
 /**************************************************************************************************/
 /* Public function */
 I3G4250D_Result_t I3G4250D_Init(void)
@@ -35,7 +31,7 @@ I3G4250D_Result_t I3G4250D_Init(void)
 	SPI_Tx(I3G4250D_CTRL_REG1_ADDR, 0xFF);
 	
 	/* Read data WHO AM I */
-	result = SPI_Rx(0x8F);
+	result = SPI_Rx(I3G4250D_WHO_AM_I_ADDR | READ_MODE);			
 	if(result != I3G4250D_WHO_AM_I)
 	{
 		I3G4250D_HIGH_CS;
@@ -129,7 +125,7 @@ void SPI_Tx(uint8_t adress, uint8_t data)
 uint8_t SPI_Rx(uint8_t adress)
 {
   GPIO_ResetBits(GPIOE,GPIO_Pin_3); //CS pin logic 0
-  adress=(0x80) | (adress); //  this tells the sensor to read and not to write, that's where the (0x80 | adress) comes from.
+  adress=(READ_MODE) | (adress); //  this tells the sensor to read and not to write, that's where the (0x80 | adress) comes from.
 
   while(!SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE));
   SPI_I2S_SendData(SPI1,adress);
